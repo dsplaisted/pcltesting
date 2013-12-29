@@ -40,6 +40,9 @@
   <ItemGroup>
     <Compile Include="Assert.cs" />
     <Compile Include="Attributes.cs" />
+    <Compile Include="DummyTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Infrastructure\Test.cs" />
     <Compile Include="Infrastructure\TestDiscoverer.cs" />
     <Compile Include="Infrastructure\TestRunner.cs" />
