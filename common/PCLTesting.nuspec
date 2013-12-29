@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="2.7.2">
+        <id>PCLTesting</id>
+        <version>0.0.1</version>
+        <title>PCL Testing - Portable Unit Test Framework</title>
+        <authors>Daniel Plaisted</authors>
+        <owners>Daniel Plaisted</owners>
+        <!--<licenseUrl>???</licenseUrl>
+        <projectUrl>???</projectUrl>-->
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>PCL Storage is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
+        <summary>PCL Storage is a simple test framework for testing across .NET platforms.</summary>
+        <tags>test testing portable pcl winrt android ios xamarin monoandroid monodroid monotouch</tags>
+        <dependencies>
+            <dependency id="Microsoft.Bcl.Async" version="1.0.165" />
+            <dependency id="Microsoft.Bcl" version="1.1.6" />
+        </dependencies>
+    </metadata>
+    <files>
+      <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\portable-net45+sl5+wp8+win8+monoandroid+monotouch\PCLTesting.dll" />
+      <!--<file scr="..\PCLTesting\bin\Release\PCLTesting.xml" target="lib\portable-net45+sl5+wp8+win8+monoandroid+monotouch\PCLTesting.xml" />-->
+    </files>
+</package>
