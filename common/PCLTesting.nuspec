@@ -20,5 +20,9 @@
     <files>
       <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\portable-net45+sl5+wp8+win8+monoandroid+monotouch\PCLTesting.dll" />
       <!--<file scr="..\PCLTesting\bin\Release\PCLTesting.xml" target="lib\portable-net45+sl5+wp8+win8+monoandroid+monotouch\PCLTesting.xml" />-->
+      <file src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" target="lib\portable-net45+sl5+wp8+win8+monoandroid+monotouch\PCLTesting.Portable.dll" />
+
+      <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\net45\PCLTesting.dll" />
+      <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\win8\PCLTesting.dll" />
     </files>
 </package>

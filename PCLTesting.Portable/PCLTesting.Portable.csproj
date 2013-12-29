@@ -5,11 +5,11 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B1289182-085B-4C34-AEC8-EEF6AA779800}</ProjectGuid>
+    <ProjectGuid>{2EA91982-B576-475C-9426-CA106A0653DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PCLTesting</RootNamespace>
-    <AssemblyName>PCLTesting</AssemblyName>
+    <AssemblyName>PCLTesting.Portable</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -41,13 +41,8 @@
     <Compile Include="..\common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DummyTypes.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ExceptionAssert.cs" />
-    <Compile Include="Infrastructure\Test.cs" />
-    <Compile Include="Infrastructure\TestDiscoverer.cs" />
-    <Compile Include="Infrastructure\TestRunner.cs" />
+    <Compile Include="Assert.cs" />
+    <Compile Include="Attributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

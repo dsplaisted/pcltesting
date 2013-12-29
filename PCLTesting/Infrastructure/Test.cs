@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PCLTesting.TestFramework.Infrastructure
+namespace PCLTesting.Infrastructure
 {
 	public enum TestState
 	{

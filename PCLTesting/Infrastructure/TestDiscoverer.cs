@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace PCLTesting.TestFramework.Infrastructure
+namespace PCLTesting.Infrastructure
 {
 	public class TestDiscoverer
 	{
@@ -26,7 +26,8 @@ namespace PCLTesting.TestFramework.Infrastructure
 			List<Test> ret = new List<Test>();
 			foreach (MethodInfo method in type.GetMethods())
 			{
-				if (method.GetCustomAttributes(typeof(TestMethodAttribute), false).Any())
+				if (method.GetCustomAttributes(false).Any(
+                    attr => attr.GetType().Name == "TestMethodAttribute"))
 				{
 					var test = new Test(method);
 					ret.Add(test);

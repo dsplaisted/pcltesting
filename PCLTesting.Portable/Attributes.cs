@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PCLTesting.TestFramework
+namespace PCLTesting
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]
 	public class TestMethodAttribute : Attribute
