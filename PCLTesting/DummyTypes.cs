@@ -8,7 +8,7 @@ using System.Text;
 //  Namespace for Windows Store app MSTest attributes
 namespace Microsoft.VisualStudio.TestPlatform.UnitTestFramework
 {
-    class DummyType
+    public class DummyType
     {
     }
 }
@@ -16,7 +16,7 @@ namespace Microsoft.VisualStudio.TestPlatform.UnitTestFramework
 //  Normal MSTest namespace
 namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
-    class DummyType
+    public class DummyType
     {
     }
 }
