@@ -6,8 +6,8 @@
         <title>PCL Testing - Portable Unit Test Framework</title>
         <authors>Daniel Plaisted</authors>
         <owners>Daniel Plaisted</owners>
-        <!--<licenseUrl>???</licenseUrl>
-        <projectUrl>???</projectUrl>-->
+        <licenseUrl>https://github.com/dsplaisted/pcltesting/blob/master/COPYING</licenseUrl>
+        <projectUrl>https://github.com/dsplaisted/pcltesting</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>PCL Testing is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
         <summary>PCL Testing is a simple test framework for testing across .NET platforms.</summary>
