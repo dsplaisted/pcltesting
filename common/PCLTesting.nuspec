@@ -9,8 +9,8 @@
         <!--<licenseUrl>???</licenseUrl>
         <projectUrl>???</projectUrl>-->
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>PCL Storage is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
-        <summary>PCL Storage is a simple test framework for testing across .NET platforms.</summary>
+        <description>PCL Testing is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
+        <summary>PCL Testing is a simple test framework for testing across .NET platforms.</summary>
         <tags>test testing portable pcl winrt android ios xamarin monoandroid monodroid monotouch</tags>
         <dependencies>
             <dependency id="Microsoft.Bcl.Async" version="1.0.165" />
