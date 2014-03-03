@@ -13,7 +13,7 @@ namespace PCLTesting.Infrastructure
 		{
 			List<Test> ret = new List<Test>();
 
-			foreach (Type type in assembly.GetExportedTypes())
+			foreach (Type type in assembly.GetExportedTypes().Where(t => !t.IsAbstract))
 			{
 				ret.AddRange(DiscoverTests(type));
 			}
