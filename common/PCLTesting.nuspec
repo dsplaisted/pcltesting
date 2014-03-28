@@ -24,5 +24,6 @@
 
       <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\net45\PCLTesting.dll" />
       <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\win8\PCLTesting.dll" />
+      <file src="..\PCLTesting\bin\Release\PCLTesting.dll" target="lib\wp8\PCLTesting.dll" />
     </files>
 </package>
