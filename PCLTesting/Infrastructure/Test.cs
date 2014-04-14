@@ -18,6 +18,7 @@ namespace PCLTesting.Infrastructure
 
     public class Test
     {
+        private static readonly object[] EmptyParameters = new object[0];
         MethodInfo _method;
 
         public Test(MethodInfo method)
@@ -45,39 +46,22 @@ namespace PCLTesting.Infrastructure
             FailureException = null;
             try
             {
-                //	Use compiled lambdas so that exceptions won't be wrapped in a TargetInvocationException
-                if (_method.IsStatic)
+                object testClassInstance = _method.IsStatic ? null : Activator.CreateInstance(_method.ReflectedType);
+                if (_method.ReturnType == typeof(void))
                 {
-                    if (_method.ReturnType == typeof(void))
-                    {
-                        var callExpression = Expression.Call(_method);
-                        var lambda = Expression.Lambda<Action>(callExpression);
-                        lambda.Compile()();
-                    }
-                    else
-                    {
-                        var callExpression = Expression.Call(_method);
-                        var lambda = Expression.Lambda<Func<Task>>(callExpression);
-                        await lambda.Compile()();
-                    }
+                    _method.Invoke(testClassInstance, EmptyParameters);
                 }
                 else
                 {
-                    object testClassInstance = Activator.CreateInstance(_method.ReflectedType);
-                    if (_method.ReturnType == typeof(void))
-                    {
-                        var callExpression = Expression.Call(Expression.Constant(testClassInstance, _method.ReflectedType), _method);
-                        var lambda = Expression.Lambda<Action>(callExpression);
-                        lambda.Compile()();
-                    }
-                    else
-                    {
-                        var callExpression = Expression.Call(Expression.Constant(testClassInstance, _method.ReflectedType), _method);
-                        var lambda = Expression.Lambda<Func<Task>>(callExpression);
-                        await lambda.Compile()();
-                    }
+                    await (Task)_method.Invoke(testClassInstance, EmptyParameters);
                 }
+
                 TestState = TestState.Passed;
+            }
+            catch (TargetInvocationException ex)
+            {
+                TestState = TestState.Failed;
+                FailureException = ex.InnerException;
             }
             catch (Exception ex)
             {
