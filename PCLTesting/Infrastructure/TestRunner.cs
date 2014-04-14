@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PCLTesting.Infrastructure
@@ -34,7 +35,7 @@ namespace PCLTesting.Infrastructure
 
         public string Log { get { return _log.ToString(); } }
 
-        public async Task RunTestsAsync()
+        public async Task RunTestsAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             PassCount = 0;
             FailCount = 0;
@@ -44,6 +45,7 @@ namespace PCLTesting.Infrastructure
 
             foreach (var test in _tests)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 await test.RunAsync();
                 if (test.TestState == TestState.Passed)
                 {
@@ -76,7 +78,5 @@ namespace PCLTesting.Infrastructure
             Debug.WriteLine(s);
             _log.AppendLine(s);
         }
-
-
     }
 }
