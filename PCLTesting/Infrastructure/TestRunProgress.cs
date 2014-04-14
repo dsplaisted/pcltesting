@@ -1,10 +1,5 @@
-﻿namespace PCLTesting
+﻿namespace PCLTesting.Infrastructure
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     public struct TestRunProgress
     {
         public TestRunProgress(int totalCount)

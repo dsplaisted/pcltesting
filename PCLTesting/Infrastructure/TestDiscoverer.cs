@@ -8,7 +8,6 @@ namespace PCLTesting.Infrastructure
 {
     public class TestDiscoverer
     {
-
         public IEnumerable<Test> DiscoverTests(Assembly assembly)
         {
             List<Test> ret = new List<Test>();
@@ -36,6 +35,5 @@ namespace PCLTesting.Infrastructure
             }
             return ret;
         }
-
     }
 }

@@ -50,7 +50,7 @@
     <Compile Include="Infrastructure\TestDiscoverer.cs" />
     <Compile Include="Infrastructure\TestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestRunProgress.cs" />
+    <Compile Include="Infrastructure\TestRunProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">
