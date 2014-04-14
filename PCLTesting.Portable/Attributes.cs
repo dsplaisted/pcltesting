@@ -5,15 +5,15 @@ using System.Text;
 
 namespace PCLTesting
 {
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]
-	public class TestMethodAttribute : Attribute
-	{
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+    public class TestMethodAttribute : Attribute
+    {
 
-	}
+    }
 
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple=false)]
-	public class TestClassAttribute : Attribute
-	{
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+    public class TestClassAttribute : Attribute
+    {
 
-	}
+    }
 }

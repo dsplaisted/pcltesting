@@ -8,44 +8,44 @@ using System.Threading.Tasks;
 
 namespace PCLTesting.Infrastructure
 {
-	public enum TestState
-	{
-		NotRun,
-		Passed,
-		Failed,
-		Skipped,
-	}
+    public enum TestState
+    {
+        NotRun,
+        Passed,
+        Failed,
+        Skipped,
+    }
 
-	public class Test
-	{
-		MethodInfo _method;
+    public class Test
+    {
+        MethodInfo _method;
 
-		public Test(MethodInfo method)
-		{
-			_method = method;
-			TestState = TestState.NotRun;
-			FailureException = null;
-		}
+        public Test(MethodInfo method)
+        {
+            _method = method;
+            TestState = TestState.NotRun;
+            FailureException = null;
+        }
 
-		public string FullName
-		{
-			get
-			{
-				return _method.DeclaringType.FullName + "." + _method.Name;
-			}
-		}
+        public string FullName
+        {
+            get
+            {
+                return _method.DeclaringType.FullName + "." + _method.Name;
+            }
+        }
 
-		public TestState TestState { get; private set; }
+        public TestState TestState { get; private set; }
 
-		public Exception FailureException { get; private set; }
+        public Exception FailureException { get; private set; }
 
-		public async Task RunAsync()
-		{
-			TestState = TestState.NotRun;
-			FailureException = null;
-			try
-			{
-				//	Use compiled lambdas so that exceptions won't be wrapped in a TargetInvocationException
+        public async Task RunAsync()
+        {
+            TestState = TestState.NotRun;
+            FailureException = null;
+            try
+            {
+                //	Use compiled lambdas so that exceptions won't be wrapped in a TargetInvocationException
                 if (_method.IsStatic)
                 {
                     if (_method.ReturnType == typeof(void))
@@ -77,13 +77,13 @@ namespace PCLTesting.Infrastructure
                         await lambda.Compile()();
                     }
                 }
-				TestState = TestState.Passed;
-			}
-			catch (Exception ex)
-			{
-				TestState = TestState.Failed;
-				FailureException = ex;
-			}			
-		}
-	}
+                TestState = TestState.Passed;
+            }
+            catch (Exception ex)
+            {
+                TestState = TestState.Failed;
+                FailureException = ex;
+            }
+        }
+    }
 }
