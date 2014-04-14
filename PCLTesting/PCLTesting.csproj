@@ -45,10 +45,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ExceptionAssert.cs" />
+    <Compile Include="HelperExtensions.cs" />
     <Compile Include="Infrastructure\Test.cs" />
     <Compile Include="Infrastructure\TestDiscoverer.cs" />
     <Compile Include="Infrastructure\TestRunner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestRunProgress.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Threading.Tasks">

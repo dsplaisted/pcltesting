@@ -35,7 +35,7 @@ namespace PCLTesting.Infrastructure
 
         public string Log { get { return _log.ToString(); } }
 
-        public async Task RunTestsAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task RunTestsAsync(IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             PassCount = 0;
             FailCount = 0;
@@ -43,6 +43,7 @@ namespace PCLTesting.Infrastructure
 
             _log.Length = 0;
 
+            progress.ReportIfNotNull(new TestRunProgress(this.TestCount));
             foreach (var test in _tests)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -72,6 +73,8 @@ namespace PCLTesting.Infrastructure
                 {
                     throw new InvalidOperationException("Unexpected test state: " + test.TestState);
                 }
+
+                progress.ReportIfNotNull(new TestRunProgress(this.PassCount, this.FailCount, this.SkipCount, this.TestCount));
             }
 
             LogLine("");
