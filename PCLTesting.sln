@@ -1,9 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCLTesting", "PCLTesting\PCLTesting.csproj", "{B1289182-085B-4C34-AEC8-EEF6AA779800}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCLTesting.Portable", "PCLTesting.Portable\PCLTesting.Portable.csproj", "{2EA91982-B576-475C-9426-CA106A0653DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{829E5B4F-35D8-41F6-8316-F6E9C7E96DEE}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\nuget.exe = .nuget\nuget.exe
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{3A0AA651-96E3-4F7E-83C5-92A0EA8C9E3A}"
+	ProjectSection(SolutionItems) = preProject
+		build\build.proj = build\build.proj
+		build\Build.tasks = build\Build.tasks
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{39112F3A-C6F7-495D-8481-87454623FC43}"
+	ProjectSection(SolutionItems) = preProject
+		common\CommonAssemblyInfo.cs = common\CommonAssemblyInfo.cs
+		common\PCLTesting.nuspec = common\PCLTesting.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
