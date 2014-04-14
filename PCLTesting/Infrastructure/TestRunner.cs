@@ -46,6 +46,11 @@ namespace PCLTesting.Infrastructure
             foreach (var test in _tests)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
+                // Give the app some breathing room to process a cancel button,
+                // since otherwise running tests is only as async as the tests themselves.
+                await TaskEx.Yield();
+
                 await test.RunAsync();
                 if (test.TestState == TestState.Passed)
                 {
