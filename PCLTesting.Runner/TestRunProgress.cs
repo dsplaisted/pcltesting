@@ -24,5 +24,10 @@
         public int SkipCount { get; private set; }
 
         public int TestCount { get; private set; }
+
+        public int ExecuteCount
+        {
+            get { return this.PassCount + this.FailCount + this.SkipCount; }
+        }
     }
 }

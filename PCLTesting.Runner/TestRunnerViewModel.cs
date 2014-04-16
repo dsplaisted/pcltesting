@@ -26,6 +26,7 @@ namespace PCLTesting.Infrastructure
 
             this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
             this.RegisterDependentProperty(() => CurrentProgress, () => Log);
+            this.RegisterDependentProperty(() => IsRunning, () => Log);
         }
 
         private TestRunProgress currentProgress;
@@ -35,6 +36,13 @@ namespace PCLTesting.Infrastructure
             set { this.SetProperty(ref this.currentProgress, value); }
         }
 
+        private bool isRunning;
+        public bool IsRunning
+        {
+            get { return this.isRunning; }
+            set { this.SetProperty(ref this.isRunning, value); }
+        }
+
         public string Summary
         {
             get
@@ -42,9 +50,9 @@ namespace PCLTesting.Infrastructure
                 return string.Format(
                   CultureInfo.CurrentCulture,
                   "{0}/{1} tests passed ({2}%)",
-                  this.runner.PassCount,
-                  this.runner.TestCount,
-                  100 * this.runner.PassCount / this.runner.TestCount);
+                  this.CurrentProgress.PassCount,
+                  this.CurrentProgress.ExecuteCount,
+                  this.CurrentProgress.ExecuteCount > 0 ? (100 * this.CurrentProgress.PassCount / this.CurrentProgress.ExecuteCount) : 0);
             }
         }
 
@@ -69,8 +77,16 @@ namespace PCLTesting.Infrastructure
 
             protected override async Task ExecuteCoreAsync(object parameter, CancellationToken cancellationToken)
             {
-                var progress = new Microsoft.Progress<TestRunProgress>(value => this.viewModel.CurrentProgress = value);
-                await this.viewModel.runner.RunTestsAsync(progress, cancellationToken);
+                this.viewModel.IsRunning = true;
+                try
+                {
+                    var progress = new Microsoft.Progress<TestRunProgress>(value => this.viewModel.CurrentProgress = value);
+                    await this.viewModel.runner.RunTestsAsync(progress, cancellationToken);
+                }
+                finally
+                {
+                    this.viewModel.IsRunning = false;
+                }
             }
         }
     }
