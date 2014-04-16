@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,10 +17,15 @@ namespace PCLTesting.Infrastructure
 
         public TestRunnerViewModel(TestRunner runner)
         {
+            Requires.NotNull(runner, "runner");
+
             this.runner = runner;
             var startCommand = new StartCommandImpl(this);
             this.StartCommand = startCommand;
             this.StopCommand = new CancelCommand(startCommand);
+
+            this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
+            this.RegisterDependentProperty(() => CurrentProgress, () => Log);
         }
 
         private TestRunProgress currentProgress;
@@ -27,6 +33,24 @@ namespace PCLTesting.Infrastructure
         {
             get { return this.currentProgress; }
             set { this.SetProperty(ref this.currentProgress, value); }
+        }
+
+        public string Summary
+        {
+            get
+            {
+                return string.Format(
+                  CultureInfo.CurrentCulture,
+                  "{0}/{1} tests passed ({2}%)",
+                  this.runner.PassCount,
+                  this.runner.TestCount,
+                  100 * this.runner.PassCount / this.runner.TestCount);
+            }
+        }
+
+        public string Log
+        {
+            get { return this.runner.Log; }
         }
 
         public ICommand StartCommand { get; private set; }
