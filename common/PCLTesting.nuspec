@@ -42,6 +42,7 @@
       <file target="lib\monoandroid" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monoandroid" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
 
+      <file target="lib\monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
       <file target="lib\monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monotouch" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
     </files>
