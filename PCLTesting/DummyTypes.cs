@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
@@ -8,6 +9,7 @@ using System.Text;
 //  Namespace for Windows Store app MSTest attributes
 namespace Microsoft.VisualStudio.TestPlatform.UnitTestFramework
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public class DummyType
     {
     }
@@ -16,6 +18,7 @@ namespace Microsoft.VisualStudio.TestPlatform.UnitTestFramework
 //  Normal MSTest namespace
 namespace Microsoft.VisualStudio.TestTools.UnitTesting
 {
+    [EditorBrowsable(EditorBrowsableState.Never)]
     public class DummyType
     {
     }
