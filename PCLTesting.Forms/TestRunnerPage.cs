@@ -42,12 +42,37 @@
                 Padding = new Thickness(10),
             };
 
+            var searchPanel = new Grid
+            {
+                ColumnDefinitions = new ColumnDefinitionCollection
+                {
+                    new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                    new ColumnDefinition { Width = GridLength.Auto },
+                },
+                Padding = new Thickness(0, 0, 5, 0),
+            };
+            searchPanel.SetValue(Grid.ColumnSpanProperty, 3);
+
             var searchBox = new Entry { Placeholder = "filter" };
             searchBox.SetBinding<TestRunnerViewModel>(Entry.TextProperty, vm => vm.SearchQuery, BindingMode.TwoWay);
             searchBox.SetValue(Grid.RowProperty, 0);
             searchBox.SetValue(Grid.ColumnProperty, 0);
-            searchBox.SetValue(Grid.ColumnSpanProperty, 3);
-            panel.Children.Add(searchBox);
+            searchPanel.Children.Add(searchBox);
+
+            var resultFilterPicker = new Picker
+            {
+                WidthRequest = 110, // I don't know why layout doesn't get this right automatically.
+                Title = "Filter by results",
+            };
+            resultFilterPicker.SetValue(Grid.ColumnProperty, 1);
+            resultFilterPicker.Items.Add("All");
+            resultFilterPicker.Items.Add("Pass");
+            resultFilterPicker.Items.Add("Fail");
+            resultFilterPicker.Items.Add("Not run");
+            resultFilterPicker.SetBinding<TestRunnerViewModel>(Picker.SelectedIndexProperty, vm => vm.ResultFilter, BindingMode.TwoWay, new EnumOrdinalValueConverter());
+            searchPanel.Children.Add(resultFilterPicker);
+
+            panel.Children.Add(searchPanel);
 
             var testsList = new ListView
             {
@@ -130,6 +155,19 @@
             public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        private class EnumOrdinalValueConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return (int)value;
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return value;
             }
         }
 

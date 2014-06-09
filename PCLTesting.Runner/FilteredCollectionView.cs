@@ -25,6 +25,7 @@
 
             this.dataSource = dataSource;
             this.filter = filter;
+            this.filterArgument = filterArgument;
             this.filteredList = new SortedList<T>(sort);
 
             this.dataSource.CollectionChanged += this.dataSource_CollectionChanged;

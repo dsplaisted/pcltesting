@@ -15,7 +15,7 @@
     public class TestRunnerViewModel : BindableBase
     {
         private readonly TestRunner runner;
-        private readonly FilteredCollectionView<Test, string> filteredTests;
+        private readonly FilteredCollectionView<Test, Tuple<string, TestResultFilter>> filteredTests;
 
         public TestRunnerViewModel(TestRunner runner)
         {
@@ -25,11 +25,12 @@
             var startCommand = new StartCommandImpl(this);
             this.StartCommand = startCommand;
             this.StopCommand = new CancelCommand(startCommand);
+            this.searchQuery = string.Empty;
 
-            this.filteredTests = new FilteredCollectionView<Test, string>(
+            this.filteredTests = new FilteredCollectionView<Test, Tuple<string, TestResultFilter>>(
                 runner.Tests,
-                (t, q) => string.IsNullOrWhiteSpace(q) || t.Name.IndexOf(q.Trim(), StringComparison.OrdinalIgnoreCase) >= 0,
-                this.SearchQuery,
+                IsTestFilterMatch,
+                Tuple.Create(this.SearchQuery, this.ResultFilter),
                 new TestComparer());
             this.filteredTests.CollectionChanged += filteredTests_CollectionChanged;
             this.filteredTests.ItemChanged += filteredTests_ItemChanged;
@@ -69,7 +70,18 @@
             set
             {
                 this.SetProperty(ref this.searchQuery, value);
-                this.filteredTests.FilterArgument = value;
+                this.filteredTests.FilterArgument = Tuple.Create(this.SearchQuery, this.ResultFilter);
+            }
+        }
+
+        private TestResultFilter resultFilter;
+        public TestResultFilter ResultFilter
+        {
+            get { return this.resultFilter; }
+            set
+            {
+                this.SetProperty(ref this.resultFilter, value);
+                this.filteredTests.FilterArgument = Tuple.Create(this.SearchQuery, this.ResultFilter);
             }
         }
 
@@ -128,6 +140,39 @@
         public ICommand ToggleRunCommand
         {
             get { return this.IsRunning ? this.StopCommand : this.StartCommand; }
+        }
+
+        private static bool IsTestFilterMatch(Test test, Tuple<string, TestResultFilter> query)
+        {
+            Requires.NotNull(test, "test");
+            Requires.NotNull(query, "query");
+
+            TestState? requiredTestState;
+            switch (query.Item2)
+            {
+                case TestResultFilter.All:
+                    requiredTestState = null;
+                    break;
+                case TestResultFilter.Passed:
+                    requiredTestState = TestState.Passed;
+                    break;
+                case TestResultFilter.Failed:
+                    requiredTestState = TestState.Failed;
+                    break;
+                case TestResultFilter.NotRun:
+                    requiredTestState = TestState.NotRun;
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+
+            if (requiredTestState.HasValue && test.Result != requiredTestState.Value)
+            {
+                return false;
+            }
+
+            string pattern = query.Item1;
+            return string.IsNullOrWhiteSpace(pattern) || test.Name.IndexOf(pattern.Trim(), StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private void filteredTests_ItemChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

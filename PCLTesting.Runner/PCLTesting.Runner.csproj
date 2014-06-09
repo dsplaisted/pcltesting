@@ -43,6 +43,7 @@
     <Compile Include="SortedList.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TestDiscoverer.cs" />
+    <Compile Include="TestResultFilter.cs" />
     <Compile Include="TestRunner.cs" />
     <Compile Include="TestRunnerViewModel.cs" />
     <Compile Include="TestRunProgress.cs" />
