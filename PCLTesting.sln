@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PCLTesting.Forms", "PCLTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWP8TestRunner", "SampleWP8TestRunner\SampleWP8TestRunner.csproj", "{159E8F90-7939-480B-985D-2B1444A41B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleAndroidTestRunner", "SampleAndroidTestRunner\SampleAndroidTestRunner.csproj", "{5CD571FD-B7BF-43D8-B596-499034F8E190}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Runners", "Sample Runners", "{D64617FF-F64E-487C-90B4-DD1AD330A04F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,8 +95,22 @@ Global
 		{159E8F90-7939-480B-985D-2B1444A41B6E}.Release|x86.ActiveCfg = Release|x86
 		{159E8F90-7939-480B-985D-2B1444A41B6E}.Release|x86.Build.0 = Release|x86
 		{159E8F90-7939-480B-985D-2B1444A41B6E}.Release|x86.Deploy.0 = Release|x86
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5CD571FD-B7BF-43D8-B596-499034F8E190}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{159E8F90-7939-480B-985D-2B1444A41B6E} = {D64617FF-F64E-487C-90B4-DD1AD330A04F}
+		{5CD571FD-B7BF-43D8-B596-499034F8E190} = {D64617FF-F64E-487C-90B4-DD1AD330A04F}
 	EndGlobalSection
 EndGlobal

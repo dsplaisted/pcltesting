@@ -6,6 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+    using PCLTesting;
 
     [TestClass]
     public class SampleTests
