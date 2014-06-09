@@ -41,7 +41,14 @@ namespace PCLTesting.Infrastructure
 
         public async Task RunTestsAsync(IEnumerable<Test> testList = null, IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            testList = testList ?? this.Tests;
+            if (testList == null)
+            {
+                testList = this.Tests;
+            }
+            else
+            {
+                testList = testList.ToList(); // snapshot the enumerable.
+            }
 
             this.PassCount = 0;
             this.FailCount = 0;

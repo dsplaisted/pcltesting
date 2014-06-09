@@ -10,18 +10,26 @@
     [TestClass]
     public class SampleTests
     {
+        private static int figityTestCounter;
+
         [TestMethod]
         public async Task PassingTest()
         {
-            await Task.Delay(250);
+            await Task.Delay(100);
             Assert.IsTrue(true);
         }
 
         [TestMethod]
         public async Task FailingTest()
         {
-            await Task.Delay(250);
+            await Task.Delay(100);
             Assert.IsTrue(false);
+        }
+
+        [TestMethod]
+        public void FigityTest()
+        {
+            Assert.AreEqual(0, figityTestCounter++ % 2);
         }
     }
 }

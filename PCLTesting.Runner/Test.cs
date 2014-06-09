@@ -71,8 +71,6 @@
 
         public async Task RunAsync()
         {
-            this.Result = TestState.NotRun;
-            this.FailureException = null;
             try
             {
                 object testClassInstance = this.method.IsStatic ? null : Activator.CreateInstance(this.method.ReflectedType);
@@ -86,6 +84,7 @@
                 }
 
                 this.Result = TestState.Passed;
+                this.FailureException = null;
             }
             catch (TargetInvocationException ex)
             {
