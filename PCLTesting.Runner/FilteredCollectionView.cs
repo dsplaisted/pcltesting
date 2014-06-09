@@ -35,6 +35,23 @@
             }
         }
 
+        /// <summary>
+        /// Raised when one of the items selected by the filter is changed.
+        /// </summary>
+        /// <remarks>
+        /// The sender is reported to be the item changed.
+        /// </remarks>
+        public event EventHandler<PropertyChangedEventArgs> ItemChanged;
+
+        protected virtual void OnItemChanged(T sender, PropertyChangedEventArgs args)
+        {
+            var itemChanged = this.ItemChanged;
+            if (itemChanged != null)
+            {
+                itemChanged(sender, args);
+            }
+        }
+
         private TFilterArg filterArgument;
         public TFilterArg FilterArgument
         {
@@ -159,6 +176,8 @@
                 this.filteredList.RemoveAt(index);
                 this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
             }
+
+            this.OnItemChanged(item, e);
         }
 
         public void Dispose()

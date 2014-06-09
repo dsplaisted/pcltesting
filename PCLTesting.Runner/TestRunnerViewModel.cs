@@ -31,11 +31,21 @@
                 (t, q) => string.IsNullOrWhiteSpace(q) || t.Name.IndexOf(q.Trim(), StringComparison.OrdinalIgnoreCase) >= 0,
                 this.SearchQuery,
                 new TestComparer());
+            this.filteredTests.CollectionChanged += filteredTests_CollectionChanged;
+            this.filteredTests.ItemChanged += filteredTests_ItemChanged;
+            this.UpdateTestCounts();
 
             this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
             this.RegisterDependentProperty(() => CurrentProgress, () => Log);
             this.RegisterDependentProperty(() => IsRunning, () => Log);
             this.RegisterDependentProperty(() => IsRunning, () => ToggleRunCommand);
+        }
+
+        private void UpdateTestCounts()
+        {
+            this.PassCount = this.Tests.Count(t => t.Result == TestState.Passed);
+            this.FailCount = this.Tests.Count(t => t.Result == TestState.Failed);
+            this.TestCount = this.Tests.Count;
         }
 
         private TestRunProgress currentProgress;
@@ -68,6 +78,27 @@
             get { return this.filteredTests; }
         }
 
+        private int testCount;
+        public int TestCount
+        {
+            get { return this.testCount; }
+            private set { this.SetProperty(ref this.testCount, value); }
+        }
+
+        private int passCount;
+        public int PassCount
+        {
+            get { return this.passCount; }
+            private set { this.SetProperty(ref this.passCount, value); }
+        }
+
+        private int failCount;
+        public int FailCount
+        {
+            get { return this.failCount; }
+            set { this.SetProperty(ref this.failCount, value); }
+        }
+
         public string Summary
         {
             get
@@ -97,6 +128,19 @@
         public ICommand ToggleRunCommand
         {
             get { return this.IsRunning ? this.StopCommand : this.StartCommand; }
+        }
+
+        private void filteredTests_ItemChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Result")
+            {
+                this.UpdateTestCounts();
+            }
+        }
+
+        private void filteredTests_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.UpdateTestCounts();
         }
 
         private class StartCommandImpl : CommandBase

@@ -92,42 +92,45 @@
             passLabel.SetValue(Grid.ColumnProperty, 0);
             panel.Children.Add(passLabel);
             var passValueLabel = new Label();
-            passValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.PassCount, false));
+            passValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.PassCount, converter: new ToStringConverter());
             passValueLabel.SetValue(Grid.RowProperty, 5);
             passValueLabel.SetValue(Grid.ColumnProperty, 0);
             panel.Children.Add(passValueLabel);
-            var passPercentLabel = new Label();
-            passPercentLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.PassCount, true));
-            passPercentLabel.SetValue(Grid.RowProperty, 6);
-            passPercentLabel.SetValue(Grid.ColumnProperty, 0);
-            panel.Children.Add(passPercentLabel);
 
             var failLabel = new Label { Text = "Fail" };
             failLabel.SetValue(Grid.RowProperty, 4);
             failLabel.SetValue(Grid.ColumnProperty, 1);
             panel.Children.Add(failLabel);
             var failValueLabel = new Label();
-            failValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.FailCount, false));
+            failValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.FailCount, converter: new ToStringConverter());
             failValueLabel.SetValue(Grid.RowProperty, 5);
             failValueLabel.SetValue(Grid.ColumnProperty, 1);
             panel.Children.Add(failValueLabel);
-            var failPercentLabel = new Label();
-            failPercentLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.FailCount, true));
-            failPercentLabel.SetValue(Grid.RowProperty, 6);
-            failPercentLabel.SetValue(Grid.ColumnProperty, 1);
-            panel.Children.Add(failPercentLabel);
 
             var totalLabel = new Label { Text = "Total" };
             totalLabel.SetValue(Grid.RowProperty, 4);
             totalLabel.SetValue(Grid.ColumnProperty, 2);
             panel.Children.Add(totalLabel);
             var totalValueLabel = new Label();
-            totalValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.TestCount, false));
+            totalValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.TestCount, converter: new ToStringConverter());
             totalValueLabel.SetValue(Grid.RowProperty, 5);
             totalValueLabel.SetValue(Grid.ColumnProperty, 2);
             panel.Children.Add(totalValueLabel);
 
             this.Content = panel;
+        }
+
+        private class ToStringConverter : IValueConverter
+        {
+            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                return value.ToString();
+            }
+
+            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private class ProgressValueConverter : IValueConverter
@@ -137,42 +140,6 @@
                 var progress = (TestRunProgress)value;
                 double result = progress.TestCount == 0 ? 0 : (double)progress.ExecuteCount / progress.TestCount;
                 return result;
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        private class NestedValueConverter : IValueConverter
-        {
-            private readonly Func<TestRunProgress, int> viewModelFetcher;
-            private readonly bool showPercent;
-
-            internal NestedValueConverter(Func<TestRunProgress, int> viewModelFetcher, bool showPercent)
-            {
-                Requires.NotNull(viewModelFetcher, "viewModelFetcher");
-
-                this.viewModelFetcher = viewModelFetcher;
-                this.showPercent = showPercent;
-            }
-
-            public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            {
-                var progress = (TestRunProgress)value;
-                int intValue = this.viewModelFetcher(progress);
-                if (showPercent)
-                {
-                    double percent = (double)intValue / progress.TestCount;
-                    return double.IsNaN(percent)
-                        ? string.Empty
-                        : string.Format("{0:n0}%", percent * 100);
-                }
-                else
-                {
-                    return intValue.ToString(culture);
-                }
             }
 
             public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
