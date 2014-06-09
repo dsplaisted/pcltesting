@@ -40,8 +40,10 @@ namespace PCLTesting.Infrastructure
 
         public string Log { get { return this.log.ToString(); } }
 
-        public async Task RunTestsAsync(IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task RunTestsAsync(IEnumerable<Test> testList = null, IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            testList = testList ?? this.Tests;
+
             this.PassCount = 0;
             this.FailCount = 0;
             this.SkipCount = 0;
@@ -49,7 +51,7 @@ namespace PCLTesting.Infrastructure
             this.log.Length = 0;
 
             progress.ReportIfNotNull(new TestRunProgress(this.TestCount));
-            foreach (var test in tests)
+            foreach (var test in testList)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 

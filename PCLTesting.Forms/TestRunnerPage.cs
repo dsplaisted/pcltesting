@@ -31,6 +31,7 @@
                 },
                 RowDefinitions = new RowDefinitionCollection
                 {
+                    new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = new GridLength(1, GridUnitType.Star) },
                     new RowDefinition { Height = GridLength.Auto },
                     new RowDefinition { Height = GridLength.Auto },
@@ -40,6 +41,13 @@
                 },
                 Padding = new Thickness(10),
             };
+
+            var searchBox = new Entry { Placeholder = "filter" };
+            searchBox.SetBinding<TestRunnerViewModel>(Entry.TextProperty, vm => vm.SearchQuery, BindingMode.TwoWay);
+            searchBox.SetValue(Grid.RowProperty, 0);
+            searchBox.SetValue(Grid.ColumnProperty, 0);
+            searchBox.SetValue(Grid.ColumnSpanProperty, 3);
+            panel.Children.Add(searchBox);
 
             var testsList = new ListView
             {
@@ -62,59 +70,60 @@
             testsList.SetBinding<TestRunnerViewModel>(ListView.ItemsSourceProperty, vm => vm.Tests);
             var scrollViewer = new ScrollView { Content = testsList };
             scrollViewer.SetValue(Grid.ColumnSpanProperty, 3);
+            scrollViewer.SetValue(Grid.RowProperty, 1);
             panel.Children.Add(scrollViewer);
 
             var startButton = new Button();
             startButton.SetValue(Grid.ColumnSpanProperty, 3);
-            startButton.SetValue(Grid.RowProperty, 1);
+            startButton.SetValue(Grid.RowProperty, 2);
             startButton.SetBinding<TestRunnerViewModel>(Button.CommandProperty, vm => vm.ToggleRunCommand);
             startButton.SetBinding<TestRunnerViewModel>(Button.TextProperty, vm => vm.IsRunning, converter: new BooleanToggleConverter<string>("Stop", "Run tests"));
             panel.Children.Add(startButton);
 
             var progress = new ProgressBar();
             progress.SetValue(Grid.ColumnSpanProperty, 3);
-            progress.SetValue(Grid.RowProperty, 2);
+            progress.SetValue(Grid.RowProperty, 3);
             progress.SetBinding<TestRunnerViewModel>(ProgressBar.IsVisibleProperty, vm => vm.IsRunning);
             progress.SetBinding<TestRunnerViewModel>(ProgressBar.ProgressProperty, vm => vm.CurrentProgress, converter: new ProgressValueConverter());
             panel.Children.Add(progress);
 
             var passLabel = new Label { Text = "Pass" };
-            passLabel.SetValue(Grid.RowProperty, 3);
+            passLabel.SetValue(Grid.RowProperty, 4);
             passLabel.SetValue(Grid.ColumnProperty, 0);
             panel.Children.Add(passLabel);
             var passValueLabel = new Label();
             passValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.PassCount, false));
-            passValueLabel.SetValue(Grid.RowProperty, 4);
+            passValueLabel.SetValue(Grid.RowProperty, 5);
             passValueLabel.SetValue(Grid.ColumnProperty, 0);
             panel.Children.Add(passValueLabel);
             var passPercentLabel = new Label();
             passPercentLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.PassCount, true));
-            passPercentLabel.SetValue(Grid.RowProperty, 5);
+            passPercentLabel.SetValue(Grid.RowProperty, 6);
             passPercentLabel.SetValue(Grid.ColumnProperty, 0);
             panel.Children.Add(passPercentLabel);
 
             var failLabel = new Label { Text = "Fail" };
-            failLabel.SetValue(Grid.RowProperty, 3);
+            failLabel.SetValue(Grid.RowProperty, 4);
             failLabel.SetValue(Grid.ColumnProperty, 1);
             panel.Children.Add(failLabel);
             var failValueLabel = new Label();
             failValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.FailCount, false));
-            failValueLabel.SetValue(Grid.RowProperty, 4);
+            failValueLabel.SetValue(Grid.RowProperty, 5);
             failValueLabel.SetValue(Grid.ColumnProperty, 1);
             panel.Children.Add(failValueLabel);
             var failPercentLabel = new Label();
             failPercentLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.FailCount, true));
-            failPercentLabel.SetValue(Grid.RowProperty, 5);
+            failPercentLabel.SetValue(Grid.RowProperty, 6);
             failPercentLabel.SetValue(Grid.ColumnProperty, 1);
             panel.Children.Add(failPercentLabel);
 
             var totalLabel = new Label { Text = "Total" };
-            totalLabel.SetValue(Grid.RowProperty, 3);
+            totalLabel.SetValue(Grid.RowProperty, 4);
             totalLabel.SetValue(Grid.ColumnProperty, 2);
             panel.Children.Add(totalLabel);
             var totalValueLabel = new Label();
             totalValueLabel.SetBinding<TestRunnerViewModel>(Label.TextProperty, vm => vm.CurrentProgress, converter: new NestedValueConverter(vm => vm.TestCount, false));
-            totalValueLabel.SetValue(Grid.RowProperty, 4);
+            totalValueLabel.SetValue(Grid.RowProperty, 5);
             totalValueLabel.SetValue(Grid.ColumnProperty, 2);
             panel.Children.Add(totalValueLabel);
 

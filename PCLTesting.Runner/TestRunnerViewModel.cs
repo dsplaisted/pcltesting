@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using PCLCommandBase;
-using Validation;
-
-namespace PCLTesting.Infrastructure
+﻿namespace PCLTesting.Infrastructure
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using PCLCommandBase;
+    using Validation;
+
     public class TestRunnerViewModel : BindableBase
     {
         private readonly TestRunner runner;
+        private readonly FilteredCollectionView<Test, string> filteredTests;
 
         public TestRunnerViewModel(TestRunner runner)
         {
@@ -24,6 +25,12 @@ namespace PCLTesting.Infrastructure
             var startCommand = new StartCommandImpl(this);
             this.StartCommand = startCommand;
             this.StopCommand = new CancelCommand(startCommand);
+
+            this.filteredTests = new FilteredCollectionView<Test, string>(
+                runner.Tests,
+                (t, q) => string.IsNullOrWhiteSpace(q) || t.Name.IndexOf(q.Trim(), StringComparison.OrdinalIgnoreCase) >= 0,
+                this.SearchQuery,
+                new TestComparer());
 
             this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
             this.RegisterDependentProperty(() => CurrentProgress, () => Log);
@@ -45,9 +52,20 @@ namespace PCLTesting.Infrastructure
             set { this.SetProperty(ref this.isRunning, value); }
         }
 
-        public ObservableCollection<Test> Tests
+        private string searchQuery;
+        public string SearchQuery
         {
-            get { return this.runner.Tests; }
+            get { return this.searchQuery; }
+            set
+            {
+                this.SetProperty(ref this.searchQuery, value);
+                this.filteredTests.FilterArgument = value;
+            }
+        }
+
+        public ICollection<Test> Tests
+        {
+            get { return this.filteredTests; }
         }
 
         public string Summary
@@ -97,12 +115,26 @@ namespace PCLTesting.Infrastructure
                 try
                 {
                     var progress = new Microsoft.Progress<TestRunProgress>(value => this.viewModel.CurrentProgress = value);
-                    await this.viewModel.runner.RunTestsAsync(progress, cancellationToken);
+                    await this.viewModel.runner.RunTestsAsync(this.viewModel.Tests, progress, cancellationToken);
                 }
                 finally
                 {
                     this.viewModel.IsRunning = false;
                 }
+            }
+        }
+
+        private class TestComparer : IComparer<Test>
+        {
+            public int Compare(Test x, Test y)
+            {
+                int compare = string.Compare(x.Name, y.Name, StringComparison.OrdinalIgnoreCase);
+                if (compare != 0)
+                {
+                    return compare;
+                }
+
+                return string.Compare(x.FullName, y.FullName, StringComparison.OrdinalIgnoreCase);
             }
         }
     }
