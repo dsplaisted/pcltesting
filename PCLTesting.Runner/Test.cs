@@ -15,7 +15,6 @@
         NotRun,
         Passed,
         Failed,
-        Skipped,
     }
 
     public class Test : BindableBase

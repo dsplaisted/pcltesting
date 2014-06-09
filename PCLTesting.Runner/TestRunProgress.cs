@@ -8,12 +8,11 @@
             this.TestCount = totalCount;
         }
 
-        public TestRunProgress(int passCount, int failCount, int skipCount, int testCount)
+        public TestRunProgress(int passCount, int failCount, int testCount)
             : this()
         {
             this.PassCount = passCount;
             this.FailCount = failCount;
-            this.SkipCount = skipCount;
             this.TestCount = testCount;
         }
 
@@ -21,13 +20,11 @@
 
         public int FailCount { get; private set; }
 
-        public int SkipCount { get; private set; }
-
         public int TestCount { get; private set; }
 
         public int ExecuteCount
         {
-            get { return this.PassCount + this.FailCount + this.SkipCount; }
+            get { return this.PassCount + this.FailCount; }
         }
     }
 }

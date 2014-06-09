@@ -36,7 +36,6 @@ namespace PCLTesting.Infrastructure
         public int TestCount { get { return this.tests.Count; } }
         public int PassCount { get; private set; }
         public int FailCount { get; private set; }
-        public int SkipCount { get; private set; }
 
         public string Log { get { return this.log.ToString(); } }
 
@@ -46,7 +45,6 @@ namespace PCLTesting.Infrastructure
 
             this.PassCount = 0;
             this.FailCount = 0;
-            this.SkipCount = 0;
 
             this.log.Length = 0;
 
@@ -64,11 +62,6 @@ namespace PCLTesting.Infrastructure
                 {
                     this.PassCount++;
                 }
-                else if (test.Result == TestState.Skipped)
-                {
-                    this.SkipCount++;
-                    LogLine("Skipped: " + test.FullName);
-                }
                 else if (test.Result == TestState.Failed)
                 {
                     this.FailCount++;
@@ -81,11 +74,11 @@ namespace PCLTesting.Infrastructure
                     throw new InvalidOperationException("Unexpected test state: " + test.Result);
                 }
 
-                progress.ReportIfNotNull(new TestRunProgress(this.PassCount, this.FailCount, this.SkipCount, this.TestCount));
+                progress.ReportIfNotNull(new TestRunProgress(this.PassCount, this.FailCount, this.TestCount));
             }
 
             this.LogLine("");
-            this.LogLine(PassCount.ToString() + " passed, " + FailCount + " failed, " + SkipCount + " skipped, " + TestCount + " total");
+            this.LogLine(PassCount.ToString() + " passed, " + FailCount + " failed, " + TestCount + " total");
         }
 
         void LogLine(string s)
