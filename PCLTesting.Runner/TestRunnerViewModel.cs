@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace PCLTesting.Infrastructure
             this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
             this.RegisterDependentProperty(() => CurrentProgress, () => Log);
             this.RegisterDependentProperty(() => IsRunning, () => Log);
+            this.RegisterDependentProperty(() => IsRunning, () => ToggleRunCommand);
         }
 
         private TestRunProgress currentProgress;
@@ -41,6 +43,11 @@ namespace PCLTesting.Infrastructure
         {
             get { return this.isRunning; }
             set { this.SetProperty(ref this.isRunning, value); }
+        }
+
+        public ObservableCollection<Test> Tests
+        {
+            get { return this.runner.Tests; }
         }
 
         public string Summary
@@ -64,6 +71,15 @@ namespace PCLTesting.Infrastructure
         public ICommand StartCommand { get; private set; }
 
         public ICommand StopCommand { get; private set; }
+
+        /// <summary>
+        /// Gets either the <see cref="StartCommand"/> or the <see cref="StopCommand"/>
+        /// depending on which one is enabled.
+        /// </summary>
+        public ICommand ToggleRunCommand
+        {
+            get { return this.IsRunning ? this.StopCommand : this.StartCommand; }
+        }
 
         private class StartCommandImpl : CommandBase
         {

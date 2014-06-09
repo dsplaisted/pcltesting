@@ -4,10 +4,10 @@
         <id>PCLTesting</id>
         <version>0.0.1</version>
         <title>PCL Testing - Portable Unit Test Framework</title>
-        <authors>Daniel Plaisted</authors>
-        <owners>Daniel Plaisted</owners>
-        <licenseUrl>https://github.com/dsplaisted/pcltesting/blob/master/COPYING</licenseUrl>
-        <projectUrl>https://github.com/dsplaisted/pcltesting</projectUrl>
+        <authors>Daniel Plaisted, Andrew Arnott</authors>
+        <owners>Daniel Plaisted, Andrew Arnott</owners>
+        <licenseUrl>https://github.com/aarnott/pcltesting/blob/master/COPYING</licenseUrl>
+        <projectUrl>https://github.com/aarnott/pcltesting</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>PCL Testing is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
         <summary>PCL Testing is a simple test framework for testing across .NET platforms.</summary>
@@ -24,26 +24,35 @@
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
 
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+
       <file target="lib\wp8" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\wp8" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\wp8" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\wpa81" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\wpa81" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
 
       <file target="lib\win8" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\win8" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      
+      <file target="lib\win8" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+
       <file target="lib\net45" src="..\PCLTesting\bin\Release\PCLTesting.dll"  />
       <file target="lib\net45" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\net45" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\sl5" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\sl5" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
 
       <file target="lib\monoandroid" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monoandroid" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monoandroid" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
       <file target="lib\monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monotouch" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monotouch" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
     </files>
   </package>
