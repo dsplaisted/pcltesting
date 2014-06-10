@@ -99,6 +99,7 @@
       <file target="lib\sl5" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\sl5" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
 
+      <file target="lib\monoandroid10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
       <file target="lib\monoandroid10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monoandroid10" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\monoandroid10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
