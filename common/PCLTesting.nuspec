@@ -29,7 +29,7 @@
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
             <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
           <group targetFramework="wp80">
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
@@ -37,7 +37,7 @@
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
           <group targetFramework="win8">
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
@@ -45,7 +45,7 @@
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
           <group targetFramework="net45">
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
@@ -53,7 +53,7 @@
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
           <group targetFramework="monoandroid10">
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
@@ -61,7 +61,7 @@
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
           <group targetFramework="monotouch10">
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
@@ -69,7 +69,7 @@
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
-            <dependency id="Xamarin.Forms" version="[1.0.6197, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
           </group>
         </dependencies>
     </metadata>
