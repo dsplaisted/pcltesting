@@ -1,18 +1,18 @@
 ﻿//  Log the test results to Debug output even when compiling for release mode
 #define DEBUG
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace PCLTesting.Infrastructure
+namespace PCLTesting.Runner
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class TestRunner
     {
         private readonly ObservableCollection<Test> tests;

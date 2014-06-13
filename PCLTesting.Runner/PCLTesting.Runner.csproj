@@ -8,7 +8,7 @@
     <ProjectGuid>{B4EAC056-B247-4DBB-B661-E0BD609AC5A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PCLTesting.Infrastructure</RootNamespace>
+    <RootNamespace>PCLTesting.Runner</RootNamespace>
     <AssemblyName>PCLTesting.Runner</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>

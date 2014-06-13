@@ -1,4 +1,4 @@
-﻿namespace PCLTesting.Infrastructure
+﻿namespace PCLTesting.Runner
 {
     using System;
     using System.Collections.Generic;

@@ -1,24 +1,11 @@
 # PCL Testing
 
-PCL Testing is a simple test framework for testing across .NET platforms.
-It supports .NET Framework 4.5, Windows Phone 8, Windows Store apps,
-Silverlight 5, Xamarin.iOS, and Xamarin.Android. 
-
-[Portable Class Libraries][1] (PCLs) make it easy to write code for multiple
-platforms, but there's not currently a great way to test a PCL on each
-platform it targets.  Hopefully test frameworks such as
-[xUnit](https://xunit.codeplex.com/) and MSTest will soon support
-cross-platform testing with PCLs.  In the meantime, PCL Testing provides
-basic support for writing portable tests and running them on multiple
-platforms.
-
-[1]: http://msdn.microsoft.com/en-us/library/gg597391(v=vs.110).aspx
-
-## How to install?
-
-[Always Be NuGetting](https://nuget.org/packages/PCLTesting/).
+This document describes how to write unit tests that run on all mobile
+platforms and how to create test runners to execute your tests on each of
+these platforms.
 
 ## Usage
+
 PCL Testing includes MSTest-style test attributes and asserts, and a simple
 test runner which can discover and run tests.  You can put your tests in a
 Portable Class Library, and create apps for each platform you support which

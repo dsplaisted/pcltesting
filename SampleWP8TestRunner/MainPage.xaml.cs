@@ -7,8 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using Microsoft.Phone.Controls;
-    using PCLTesting.Forms;
-    using PCLTesting.Infrastructure;
+    using PCLTesting.Runner;
     using Xamarin.Forms;
 
     public partial class MainPage : PhoneApplicationPage

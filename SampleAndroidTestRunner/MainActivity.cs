@@ -8,8 +8,7 @@
     using Android.Runtime;
     using Android.Views;
     using Android.Widget;
-    using PCLTesting.Forms;
-    using PCLTesting.Infrastructure;
+    using PCLTesting.Runner;
     using Xamarin.Forms;
     using Xamarin.Forms.Platform.Android;
 

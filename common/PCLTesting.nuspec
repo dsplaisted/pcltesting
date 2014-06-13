@@ -74,6 +74,8 @@
         </dependencies>
     </metadata>
     <files>
+      <file target="" src="README.txt" />
+
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
 

@@ -1,4 +1,4 @@
-﻿namespace PCLTesting.Infrastructure
+﻿namespace PCLTesting.Runner
 {
     public enum TestResultFilter
     {

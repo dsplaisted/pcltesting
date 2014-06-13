@@ -6,8 +6,7 @@ namespace SampleiOSTestRunner
     using System.Reflection;
     using MonoTouch.Foundation;
     using MonoTouch.UIKit;
-    using PCLTesting.Forms;
-    using PCLTesting.Infrastructure;
+    using PCLTesting.Runner;
     using Xamarin.Forms;
 
     [Register("AppDelegate")]
