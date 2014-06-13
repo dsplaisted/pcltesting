@@ -12,6 +12,7 @@
         <description>PCL Testing is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
         <summary>PCL Testing is a simple test framework for testing across .NET platforms.</summary>
         <tags>test testing portable pcl winrt android ios xamarin monoandroid monodroid monotouch</tags>
+        <releaseNotes>Adds Xamarin.Forms based UI for platform-independent test runner with filtered test runs, aggregate results, and easier reviewing of errors.</releaseNotes>
         <dependencies>
           <group>
             <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
