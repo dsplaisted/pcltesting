@@ -8,7 +8,7 @@
     using Validation;
     using Xamarin.Forms;
 
-    public class TestResultPage : ContentPage
+    internal class TestResultPage : ContentPage
     {
         public TestResultPage(Test test)
         {
