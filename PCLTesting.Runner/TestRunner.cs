@@ -33,6 +33,12 @@ namespace PCLTesting.Runner
             get { return this.tests; }
         }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether tests should be run
+        /// on the UI thread of the target platform.
+        /// </summary>
+        public bool IsUIThreadRequired { get; set; }
+
         public int TestCount { get { return this.tests.Count; } }
         public int PassCount { get; private set; }
         public int FailCount { get; private set; }
@@ -54,6 +60,11 @@ namespace PCLTesting.Runner
             this.FailCount = 0;
 
             this.log.Length = 0;
+
+            if (!this.IsUIThreadRequired)
+            {
+                await TaskScheduler.Default;
+            }
 
             progress.ReportIfNotNull(new TestRunProgress(this.TestCount));
             foreach (var test in testList)
