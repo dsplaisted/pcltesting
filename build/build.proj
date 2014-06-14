@@ -13,7 +13,7 @@
     <MinorVersion>1</MinorVersion>
     <Build>2</Build>
     <Revision>0</Revision>
-    <PackagePrereleaseSuffix>-Beta2</PackagePrereleaseSuffix>
+    <PackagePrereleaseSuffix>-Beta3</PackagePrereleaseSuffix>
     
     <AssemblyVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyVersion>
     <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyFileVersion>
