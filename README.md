@@ -112,4 +112,4 @@ Replace your `FinishedLaunching` method with this:
     }
 
 For a full example of how to use PCL Testing, see the samples in the source
-code behind [PCL Testing](https://github.com/aarnott/pcltesting/).
+code behind [PCL Testing](https://github.com/dsplaisted/pcltesting/).
