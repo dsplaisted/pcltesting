@@ -1,26 +1,26 @@
 ﻿//  Log the test results to Debug output even when compiling for release mode
 #define DEBUG
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace PCLTesting.Infrastructure
+namespace PCLTesting.Runner
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+
     public class TestRunner
     {
-        List<Test> _tests;
-        StringBuilder _log;
+        private readonly ObservableCollection<Test> tests;
+        private readonly StringBuilder log = new StringBuilder();
 
         public TestRunner(IEnumerable<Test> tests)
         {
-            _tests = tests.ToList();
-            _log = new StringBuilder();
+            this.tests = new ObservableCollection<Test>(tests);
         }
 
         public TestRunner(params Assembly[] assemblies)
@@ -28,23 +28,46 @@ namespace PCLTesting.Infrastructure
         {
         }
 
-        public int TestCount { get { return _tests.Count; } }
+        public ObservableCollection<Test> Tests
+        {
+            get { return this.tests; }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether tests should be run
+        /// on the UI thread of the target platform.
+        /// </summary>
+        public bool IsUIThreadRequired { get; set; }
+
+        public int TestCount { get { return this.tests.Count; } }
         public int PassCount { get; private set; }
         public int FailCount { get; private set; }
-        public int SkipCount { get; private set; }
 
-        public string Log { get { return _log.ToString(); } }
+        public string Log { get { return this.log.ToString(); } }
 
-        public async Task RunTestsAsync(IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task RunTestsAsync(IEnumerable<Test> testList = null, IProgress<TestRunProgress> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            PassCount = 0;
-            FailCount = 0;
-            SkipCount = 0;
+            if (testList == null)
+            {
+                testList = this.Tests;
+            }
+            else
+            {
+                testList = testList.ToList(); // snapshot the enumerable.
+            }
 
-            _log.Length = 0;
+            this.PassCount = 0;
+            this.FailCount = 0;
+
+            this.log.Length = 0;
+
+            if (!this.IsUIThreadRequired)
+            {
+                await TaskScheduler.Default;
+            }
 
             progress.ReportIfNotNull(new TestRunProgress(this.TestCount));
-            foreach (var test in _tests)
+            foreach (var test in testList)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -53,38 +76,33 @@ namespace PCLTesting.Infrastructure
                 await TaskEx.Yield();
 
                 await test.RunAsync();
-                if (test.TestState == TestState.Passed)
+                if (test.Result == TestState.Passed)
                 {
-                    PassCount++;
+                    this.PassCount++;
                 }
-                else if (test.TestState == TestState.Skipped)
+                else if (test.Result == TestState.Failed)
                 {
-                    SkipCount++;
-                    LogLine("Skipped: " + test.FullName);
-                }
-                else if (test.TestState == TestState.Failed)
-                {
-                    FailCount++;
-                    LogLine("Failed: " + test.FullName);
-                    LogLine(test.FailureException.ToString());
-                    LogLine("");
+                    this.FailCount++;
+                    this.LogLine("Failed: " + test.FullName);
+                    this.LogLine(test.FailureException.ToString());
+                    this.LogLine("");
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unexpected test state: " + test.TestState);
+                    throw new InvalidOperationException("Unexpected test state: " + test.Result);
                 }
 
-                progress.ReportIfNotNull(new TestRunProgress(this.PassCount, this.FailCount, this.SkipCount, this.TestCount));
+                progress.ReportIfNotNull(new TestRunProgress(this.PassCount, this.FailCount, this.TestCount));
             }
 
-            LogLine("");
-            LogLine(PassCount.ToString() + " passed, " + FailCount + " failed, " + SkipCount + " skipped, " + TestCount + " total");
+            this.LogLine("");
+            this.LogLine(PassCount.ToString() + " passed, " + FailCount + " failed, " + TestCount + " total");
         }
 
         void LogLine(string s)
         {
             Debug.WriteLine(s);
-            _log.AppendLine(s);
+            this.log.AppendLine(s);
         }
     }
 }

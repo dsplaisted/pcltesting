@@ -4,46 +4,113 @@
         <id>PCLTesting</id>
         <version>0.0.1</version>
         <title>PCL Testing - Portable Unit Test Framework</title>
-        <authors>Daniel Plaisted</authors>
-        <owners>Daniel Plaisted</owners>
-        <licenseUrl>https://github.com/dsplaisted/pcltesting/blob/master/COPYING</licenseUrl>
-        <projectUrl>https://github.com/dsplaisted/pcltesting</projectUrl>
+        <authors>Daniel Plaisted, Andrew Arnott</authors>
+        <owners>Daniel Plaisted, Andrew Arnott</owners>
+        <licenseUrl>https://github.com/aarnott/pcltesting/blob/master/COPYING</licenseUrl>
+        <projectUrl>https://github.com/aarnott/pcltesting</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>PCL Testing is a simple test framework for writing portable tests and running them on .NET, Windows Phone, Windows Store, Xamarin.iOS, Xamarin.Android, and Silverlight.</description>
         <summary>PCL Testing is a simple test framework for testing across .NET platforms.</summary>
         <tags>test testing portable pcl winrt android ios xamarin monoandroid monodroid monotouch</tags>
+        <releaseNotes>Adds Xamarin.Forms based UI for platform-independent test runner with filtered test runs, aggregate results, and easier reviewing of errors.</releaseNotes>
         <dependencies>
-            <dependency id="Microsoft.Bcl" version="[1.1.8, 2.0)" />
+          <group>
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
             <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
             <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
             <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
             <dependency id="Validation" version="[2.0.4, 3.0)" />
+          </group>
+          <group targetFramework="portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+          </group>
+          <group targetFramework="portable-net45+win+wp80+MonoAndroid10+MonoTouch10">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
+          <group targetFramework="wp80">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
+            <dependency id="Validation" version="[2.0.4, 3.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
+          <group targetFramework="win8">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
+            <dependency id="Validation" version="[2.0.4, 3.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
+          <group targetFramework="net45">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
+            <dependency id="Validation" version="[2.0.4, 3.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
+          <group targetFramework="monoandroid10">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
+            <dependency id="Validation" version="[2.0.4, 3.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
+          <group targetFramework="monotouch10">
+            <dependency id="Microsoft.Bcl" version="[1.1.9, 2.0)" />
+            <dependency id="Microsoft.Bcl.Async" version="[1.0.168, 2.0)" />
+            <dependency id="Microsoft.Bcl.Build" version="[1.0.14, 2.0)" />
+            <dependency id="PCLCommandBase" version="[0.2.1, 1.0)" />
+            <dependency id="Validation" version="[2.0.4, 3.0)" />
+            <dependency id="Xamarin.Forms" version="[1.1.0.6201, 2.0)" />
+          </group>
         </dependencies>
     </metadata>
     <files>
+      <file target="" src="README.txt" />
+
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
 
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+
       <file target="lib\wp8" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\wp8" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\wp8" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\wpa81" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\wpa81" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
 
       <file target="lib\win8" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\win8" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      
+      <file target="lib\win8" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+
       <file target="lib\net45" src="..\PCLTesting\bin\Release\PCLTesting.dll"  />
       <file target="lib\net45" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\net45" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\sl5" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\sl5" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
       <file target="lib\sl5" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
 
-      <file target="lib\monoandroid" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      <file target="lib\monoandroid" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monoandroid10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\monoandroid10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\monoandroid10" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monoandroid10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
-      <file target="lib\monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
-      <file target="lib\monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      <file target="lib\monotouch" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monotouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\monotouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\monotouch10" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\monotouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
     </files>
   </package>

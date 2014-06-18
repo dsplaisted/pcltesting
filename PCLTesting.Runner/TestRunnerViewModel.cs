@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using PCLCommandBase;
-using Validation;
-
-namespace PCLTesting.Infrastructure
+﻿namespace PCLTesting.Runner
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Windows.Input;
+    using PCLCommandBase;
+    using Validation;
+
     public class TestRunnerViewModel : BindableBase
     {
         private readonly TestRunner runner;
+        private readonly FilteredCollectionView<Test, Tuple<string, TestResultFilter>> filteredTests;
 
         public TestRunnerViewModel(TestRunner runner)
         {
@@ -23,10 +25,28 @@ namespace PCLTesting.Infrastructure
             var startCommand = new StartCommandImpl(this);
             this.StartCommand = startCommand;
             this.StopCommand = new CancelCommand(startCommand);
+            this.searchQuery = string.Empty;
+
+            this.filteredTests = new FilteredCollectionView<Test, Tuple<string, TestResultFilter>>(
+                runner.Tests,
+                IsTestFilterMatch,
+                Tuple.Create(this.SearchQuery, this.ResultFilter),
+                new TestComparer());
+            this.filteredTests.CollectionChanged += filteredTests_CollectionChanged;
+            this.filteredTests.ItemChanged += filteredTests_ItemChanged;
+            this.UpdateTestCounts();
 
             this.RegisterDependentProperty(() => CurrentProgress, () => Summary);
             this.RegisterDependentProperty(() => CurrentProgress, () => Log);
             this.RegisterDependentProperty(() => IsRunning, () => Log);
+            this.RegisterDependentProperty(() => IsRunning, () => ToggleRunCommand);
+        }
+
+        private void UpdateTestCounts()
+        {
+            this.PassCount = this.Tests.Count(t => t.Result == TestState.Passed);
+            this.FailCount = this.Tests.Count(t => t.Result == TestState.Failed);
+            this.TestCount = this.Tests.Count;
         }
 
         private TestRunProgress currentProgress;
@@ -41,6 +61,54 @@ namespace PCLTesting.Infrastructure
         {
             get { return this.isRunning; }
             set { this.SetProperty(ref this.isRunning, value); }
+        }
+
+        private string searchQuery;
+        public string SearchQuery
+        {
+            get { return this.searchQuery; }
+            set
+            {
+                this.SetProperty(ref this.searchQuery, value);
+                this.filteredTests.FilterArgument = Tuple.Create(this.SearchQuery, this.ResultFilter);
+            }
+        }
+
+        private TestResultFilter resultFilter;
+        public TestResultFilter ResultFilter
+        {
+            get { return this.resultFilter; }
+            set
+            {
+                this.SetProperty(ref this.resultFilter, value);
+                this.filteredTests.FilterArgument = Tuple.Create(this.SearchQuery, this.ResultFilter);
+            }
+        }
+
+        public ICollection<Test> Tests
+        {
+            get { return this.filteredTests; }
+        }
+
+        private int testCount;
+        public int TestCount
+        {
+            get { return this.testCount; }
+            private set { this.SetProperty(ref this.testCount, value); }
+        }
+
+        private int passCount;
+        public int PassCount
+        {
+            get { return this.passCount; }
+            private set { this.SetProperty(ref this.passCount, value); }
+        }
+
+        private int failCount;
+        public int FailCount
+        {
+            get { return this.failCount; }
+            set { this.SetProperty(ref this.failCount, value); }
         }
 
         public string Summary
@@ -65,6 +133,61 @@ namespace PCLTesting.Infrastructure
 
         public ICommand StopCommand { get; private set; }
 
+        /// <summary>
+        /// Gets either the <see cref="StartCommand"/> or the <see cref="StopCommand"/>
+        /// depending on which one is enabled.
+        /// </summary>
+        public ICommand ToggleRunCommand
+        {
+            get { return this.IsRunning ? this.StopCommand : this.StartCommand; }
+        }
+
+        private static bool IsTestFilterMatch(Test test, Tuple<string, TestResultFilter> query)
+        {
+            Requires.NotNull(test, "test");
+            Requires.NotNull(query, "query");
+
+            TestState? requiredTestState;
+            switch (query.Item2)
+            {
+                case TestResultFilter.All:
+                    requiredTestState = null;
+                    break;
+                case TestResultFilter.Passed:
+                    requiredTestState = TestState.Passed;
+                    break;
+                case TestResultFilter.Failed:
+                    requiredTestState = TestState.Failed;
+                    break;
+                case TestResultFilter.NotRun:
+                    requiredTestState = TestState.NotRun;
+                    break;
+                default:
+                    throw new ArgumentException();
+            }
+
+            if (requiredTestState.HasValue && test.Result != requiredTestState.Value)
+            {
+                return false;
+            }
+
+            string pattern = query.Item1;
+            return string.IsNullOrWhiteSpace(pattern) || test.Name.IndexOf(pattern.Trim(), StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private void filteredTests_ItemChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Result")
+            {
+                this.UpdateTestCounts();
+            }
+        }
+
+        private void filteredTests_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.UpdateTestCounts();
+        }
+
         private class StartCommandImpl : CommandBase
         {
             private readonly TestRunnerViewModel viewModel;
@@ -81,12 +204,26 @@ namespace PCLTesting.Infrastructure
                 try
                 {
                     var progress = new Microsoft.Progress<TestRunProgress>(value => this.viewModel.CurrentProgress = value);
-                    await this.viewModel.runner.RunTestsAsync(progress, cancellationToken);
+                    await this.viewModel.runner.RunTestsAsync(this.viewModel.Tests, progress, cancellationToken);
                 }
                 finally
                 {
                     this.viewModel.IsRunning = false;
                 }
+            }
+        }
+
+        private class TestComparer : IComparer<Test>
+        {
+            public int Compare(Test x, Test y)
+            {
+                int compare = string.Compare(x.Name, y.Name, StringComparison.OrdinalIgnoreCase);
+                if (compare != 0)
+                {
+                    return compare;
+                }
+
+                return string.Compare(x.FullName, y.FullName, StringComparison.OrdinalIgnoreCase);
             }
         }
     }

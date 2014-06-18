@@ -10,14 +10,14 @@
   
   <PropertyGroup>
     <MajorVersion>0</MajorVersion>
-    <MinorVersion>1</MinorVersion>
-    <Build>2</Build>
+    <MinorVersion>2</MinorVersion>
+    <Build>0</Build>
     <Revision>0</Revision>
-
+    <PackagePrereleaseSuffix></PackagePrereleaseSuffix>
     
     <AssemblyVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyVersion>
     <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyFileVersion>
-    <PackageVersion>$(MajorVersion).$(MinorVersion).$(Build)</PackageVersion>
+    <PackageVersion>$(MajorVersion).$(MinorVersion).$(Build)$(PackagePrereleaseSuffix)</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-
-namespace PCLTesting.Infrastructure
+﻿namespace PCLTesting.Runner
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+
     public class TestDiscoverer
     {
         public IEnumerable<Test> DiscoverTests(Assembly assembly)
