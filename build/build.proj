@@ -11,9 +11,9 @@
   <PropertyGroup>
     <MajorVersion>0</MajorVersion>
     <MinorVersion>2</MinorVersion>
-    <Build>0</Build>
+    <Build>1</Build>
     <Revision>0</Revision>
-    <PackagePrereleaseSuffix></PackagePrereleaseSuffix>
+    <PackagePrereleaseSuffix>-pre</PackagePrereleaseSuffix>
     
     <AssemblyVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyVersion>
     <AssemblyFileVersion>$(MajorVersion).$(MinorVersion).$(Build).$(Revision)</AssemblyFileVersion>
