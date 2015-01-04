@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <PCLTestingRoot>$(MSBuildProjectDirectory)\..</PCLTestingRoot>
-    <NugetExe>$(PCLTestingRoot)\.nuget\NuGet.exe</NugetExe>
+    <NugetExe>$(PCLTestingRoot)\Packages\NuGet.CommandLine.2.8.3\tools\NuGet.exe</NugetExe>
     <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
   </PropertyGroup>
   
