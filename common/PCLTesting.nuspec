@@ -77,12 +77,12 @@
     <files>
       <file target="" src="README.txt" />
 
-      <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      <file target="lib\portable-net45+sl5+wp8+wpa81+win8+monoandroid+monotouch" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\portable-net45+sl5+wp8+wpa81+win8+MonoAndroid10+xamarinios10+MonoTouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\portable-net45+sl5+wp8+wpa81+win8+MonoAndroid10+xamarinios10+MonoTouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
 
-      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
-      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
-      <file target="lib\portable-net45+win+wp80+MonoAndroid10+MonoTouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\portable-net45+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
 
       <file target="lib\wp8" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\wp8" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
@@ -112,5 +112,10 @@
       <file target="lib\monotouch10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
       <file target="lib\monotouch10" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
       <file target="lib\monotouch10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
+
+      <file target="lib\xamarinios10" src="..\PCLTesting.Portable\bin\Release\PCLTesting.Portable.dll" />
+      <file target="lib\xamarinios10" src="..\PCLTesting\bin\Release\PCLTesting.dll" />
+      <file target="lib\xamarinios10" src="..\PCLTesting.Runner\bin\Release\PCLTesting.Runner.dll" />
+      <file target="lib\xamarinios10" src="..\PCLTesting.Forms\bin\Release\PCLTesting.Forms.dll" />
     </files>
   </package>
